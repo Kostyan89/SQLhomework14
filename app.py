@@ -27,7 +27,7 @@ def movie_year(year):
     else:
         abort(404)
     print(make_result('title', 'release_year', data=results))
-    return jsonify(make_result('title', 'country', 'genre', 'description', data=results))
+    return jsonify(make_result('title', 'release_year', data=results))
 
 
 if __name__ == '__main__':
