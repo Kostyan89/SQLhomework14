@@ -26,8 +26,12 @@ def movie_year(year):
         results = run_sql(sql)
     else:
         abort(404)
-    print(make_result('title', 'release_year', data=results))
     return jsonify(make_result('title', 'release_year', data=results))
+
+
+@app.route('/rating/children')
+def rating_children()
+
 
 
 if __name__ == '__main__':
