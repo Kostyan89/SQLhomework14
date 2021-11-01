@@ -1,7 +1,9 @@
 import sqlite3
+from flask import jsonify
 
 
 path_sql = 'netflix.db'
+
 
 def run_sql(sql):
     with sqlite3.connect(path_sql) as conn:
@@ -18,3 +20,13 @@ def make_result(*fields, data):
             results_line[field] = line[i]
         results.append(results_line)
     return results
+
+
+def get_by_listed_in(listed_in):
+    sql = f"SELECT title, description FROM netflix WHERE listed_in = '{listed_in}' AND release_year = MAX(" \
+          f"release_year) LIMIT 10 "
+    results = run_sql(sql)
+    return jsonify(make_result('title', 'rating', 'description', data=results))
+
+
+get_by_listed_in('Horror')
