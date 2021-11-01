@@ -30,8 +30,24 @@ def movie_year(year):
 
 
 @app.route('/rating/children')
-def rating_children()
+def rating_children():
+    sql = f"SELECT title, rating, description FROM netflix WHERE rating = 'G' LIMIT 100"
+    results = run_sql(sql)
+    return jsonify(make_result('title', 'rating', 'description', data=results))
 
+
+@app.route('/rating/family')
+def rating_family():
+    sql = f"SELECT title, rating, description FROM netflix WHERE rating = 'PG' OR rating = 'PG-13' LIMIT 100"
+    results = run_sql(sql)
+    return jsonify(make_result('title', 'rating', 'description', data=results))
+
+
+@app.route('/rating/adult')
+def rating_adult():
+    sql = f"SELECT title, rating, description FROM netflix WHERE rating = 'R' OR rating = 'NC-17' LIMIT 100"
+    results = run_sql(sql)
+    return jsonify(make_result('title', 'rating', 'description', data=results))
 
 
 if __name__ == '__main__':
