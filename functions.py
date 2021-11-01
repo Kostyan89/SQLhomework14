@@ -22,11 +22,11 @@ def make_result(*fields, data):
     return results
 
 
-def get_by_listed_in(listed_in):
-    sql = f"SELECT title, description FROM netflix WHERE listed_in = '{listed_in}' AND release_year = MAX(" \
-          f"release_year) LIMIT 10 "
+def get_movies_by_listed_in(listed_in):
+    sql = f'''SELECT title, description FROM netflix WHERE listed_in = '{listed_in}' 
+    ORDER BY release_year DESC LIMIT 10'''
     results = run_sql(sql)
-    return jsonify(make_result('title', 'rating', 'description', data=results))
+    return jsonify(make_result('title', 'description', data=results))
 
 
-get_by_listed_in('Horror')
+print(get_movies_by_listed_in('Horror'))
