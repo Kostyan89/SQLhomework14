@@ -24,17 +24,8 @@ def make_result(*fields, data):
 
 def get_movies_by_listed_in(listed_in):
     sql = f'''SELECT title, description FROM netflix WHERE listed_in = '{listed_in}' 
-    ORDER BY release_year
+    ORDER BY date_added
     LIMIT 10'''
     results = run_sql(sql)
     return jsonify(make_result('title', 'description', data=results))
 
-print(get_movies_by_listed_in('Comedies'))
-
-# sql = f'''SELECT title, description FROM netflix WHERE listed_in = 'Comedies'
-#         GROUP BY release_year
-#         HAVING MAX(release_year)
-#           LIMIT 10'''
-# results = run_sql(sql)
-# for i in results:
-#     print(i)
